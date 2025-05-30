@@ -1,0 +1,122 @@
+* {
+    margin: 0px;
+    padding: 0%;
+    box-sizing: border-box;
+}
+body {
+    background-color: #000430;
+    color: white;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 120px auto 0 auto ;
+    max-width: 450px;
+    
+}
+.stats-container {
+    padding: 30px;
+    border-radius: 17px;
+    border: 2px solid #828dff;
+    display: flex;
+    justify-content: space-between;
+    gap: 55px;
+    width: 100%;
+}
+.details {
+    width: 100%;
+}
+#progressBar {
+    width: 100%;
+    height: 10px;
+    background-color: var(--secondaryBackground);
+    border-radius: 7px;
+    margin-top: 25px;
+}
+#progress {
+    width: 0%;
+    height: 10px;
+    background-color: var(--teal);
+    border-radius: 7px;
+    transition: all 0.3s ease;
+}
+#number {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    background-color: #828dff;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 30px;
+    font-weight: bold;
+}
+form {
+    margin-top: 60px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+input{
+    flex: 1;
+    padding: 10px;
+    background-color: #171c48;
+    color: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--purple); 
+    outline: none;
+}
+button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #828dff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+:root {
+    --secondaryBackground : #171c48;
+    --teal : #24feee;
+    --purple:#828fff;
+    --background: #000430;
+}
+#task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+    width: 100%;
+}
+.taskItem {
+    display: flex;
+    background-color: var(--secondaryBackground);
+    padding: 10px;
+    border-radius: 10px;
+    justify-content: space-between;
+}
+.task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.completed p {
+    text-decoration: line-through;
+    color: #24feee;
+}
+.taskItem img {
+    width: 24px;
+    height: 24px;
+    margin: 0 10px;
+    cursor: pointer;
+    
+}
