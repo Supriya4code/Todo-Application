@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded",() =>{
 })
 
 let tasks = [];
+let currentFilter = "all";
+
+
 
 const saveTask = ()=>{
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -17,12 +20,17 @@ const saveTask = ()=>{
 const addTask = ()=> {
     const taskInput = document.getElementById("taskInput");
     const text = taskInput.value.trim();
+    
     if(text){
         tasks.push({text: text, completed: false});
         updateTasksList();
         updateBar();
         saveTask();
     }
+    else{
+      alert("Please Enter Your Task !");
+    }
+    taskInput.value = "";   //clear input after adding
 };
 
 const toggleTestComplete = (index) =>{
@@ -67,7 +75,15 @@ const updateTasksList = () => {
     const taskList = document.getElementById("task-list");
     taskList.innerHTML = "";
 
-    tasks.forEach((task, index) => {
+    let filteredTasks = tasks;
+
+    if (currentFilter === "active") {
+        filteredTasks = tasks.filter(task => !task.completed);
+    } else if (currentFilter === "completed") {
+        filteredTasks = tasks.filter(task => task.completed);
+    }
+      
+      filteredTasks.forEach((task, index) => {
         const listItem = document.createElement("li");
         
         listItem.innerHTML = `
@@ -84,55 +100,77 @@ const updateTasksList = () => {
         `;
         listItem.addEventListener("change", () => toggleTestComplete(index));
         taskList.append(listItem);
-    });
+      });
 
 };
 
+function setActiveFilterButton(filterId) {
+    const buttons = document.querySelectorAll(".filter button");
+    buttons.forEach(btn => btn.classList.remove("active"));
+    document.getElementById(filterId).classList.add("active");
+}
+
 document.getElementById("newTask").addEventListener("click", function(e){
     e.preventDefault();
-
     addTask();
-    taskInput.value = "";
+});
+
+document.getElementById("all").addEventListener("click", () => {
+      currentFilter = "all";
+      updateTasksList();
+      setActiveFilterButton("all");
+});
+
+document.getElementById("active").addEventListener("click", () => {
+      currentFilter = "active";
+      updateTasksList();
+      setActiveFilterButton("active");
+});
+
+document.getElementById("completed").addEventListener("click", () => {
+      currentFilter = "completed";
+      updateTasksList();
+      setActiveFilterButton("completed");
 });
 
 const blaskConfetti = ()=> {
     const count = 200,
-  defaults = {
-    origin: { y: 0.7 },
-  };
+    defaults = {
+      origin: { y: 0.7 },
+    };
 
-function fire(particleRatio, opts) {
-  confetti(
-    Object.assign({}, defaults, opts, {
-      particleCount: Math.floor(count * particleRatio),
-    })
-  );
-}
+  function fire(particleRatio, opts) {
+    confetti(
+      Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(count * particleRatio),
+      })
+    );
+  }
 
-fire(0.25, {
-  spread: 26,
-  startVelocity: 55,
-});
+  fire(0.25, {
+    spread: 26,
+    startVelocity: 55,
+  });
 
-fire(0.2, {
-  spread: 60,
-});
+  fire(0.2, {
+    spread: 60,
+  });
 
-fire(0.35, {
-  spread: 100,
-  decay: 0.91,
-  scalar: 0.8,
-});
+  fire(0.35, {
+    spread: 100,
+    decay: 0.91,
+    scalar: 0.8,
+  });
 
-fire(0.1, {
-  spread: 120,
-  startVelocity: 25,
-  decay: 0.92,
-  scalar: 1.2,
-});
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 25,
+    decay: 0.92,
+    scalar: 1.2,
+  });
 
-fire(0.1, {
-  spread: 120,
-  startVelocity: 45,
-});
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 45,
+  });
 }
